@@ -4,7 +4,7 @@ import { defineConfig } from "vite"
 
 export default defineConfig({
   plugins: [react()],
-  base: "TinyShare",
+  base: "/TinyShare/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
