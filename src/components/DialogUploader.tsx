@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog"
 import { FileUploader } from "@/components/FileUploader"
 
-export function DialogUploaderDemo() {
+export function DialogUploader() {
   const [files, setFiles] = React.useState<File[]>([])
 
   return (
@@ -29,7 +29,6 @@ export function DialogUploaderDemo() {
           </DialogDescription>
         </DialogHeader>
         <FileUploader
-          maxFiles={8}
           maxSize={5 * 1024 * 1024}
           onValueChange={setFiles}
         />

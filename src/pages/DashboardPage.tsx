@@ -1,3 +1,4 @@
+import { DialogUploader } from '@/components/DialogUploader';
 import { RootState } from '@/redux/store';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
@@ -11,8 +12,8 @@ export default function DashboardPage() {
   }
 
   return (
-    <div>
-      <h1>Dashboard</h1>
+    <div className='h-screen grid place-items-center'>
+      <DialogUploader /> 
     </div>
   );
 }
