@@ -46,7 +46,7 @@ class APIClient<T> {
 
   post = (data: object) => {
     return axiosInstance
-      .post<FetchResponse<T>>(this.endpoint, {data})
+      .post<FetchResponse<T>>(this.endpoint, data)
       .then((res) => res.data);
   }
 
