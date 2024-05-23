@@ -14,6 +14,9 @@ import {
 import { Input } from "@/components/ui/input";
 import useRegister from "@/hooks/useRegister";
 import { Loader } from "lucide-react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { Navigate } from "react-router-dom";
 
 const formSchema = z.object({
   username: z.string().max(50),
@@ -33,10 +36,15 @@ export default function RegisterPage() {
   });
   const { isSubmitting } = form.formState;
 
-
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
     registerMutaion.mutate(values);
+  }
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" />;
   }
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -72,13 +80,13 @@ export default function RegisterPage() {
                   <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input type="email" placeholder="email" {...field} />
-                    </FormControl>
-                    <FormDescription>
-                        We will never share your email.
-                    </FormDescription>
-                    <FormMessage />
+                  </FormControl>
+                  <FormDescription>
+                    We will never share your email.
+                  </FormDescription>
+                  <FormMessage />
                 </FormItem>
-                )}
+              )}
             />
             <FormField
               control={form.control}
@@ -96,7 +104,10 @@ export default function RegisterPage() {
                 </FormItem>
               )}
             />
-           <Button type="submit" disabled={isSubmitting || registerMutaion.isPending}>
+            <Button
+              type="submit"
+              disabled={isSubmitting || registerMutaion.isPending}
+            >
               {registerMutaion.isPending ? <Loader /> : "Submit"}
             </Button>
           </form>

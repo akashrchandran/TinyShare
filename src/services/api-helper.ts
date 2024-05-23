@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosProgressEvent, AxiosRequestConfig } from "axios";
 
 export interface FetchResponse<T> {
   error: boolean;
@@ -48,6 +48,15 @@ class APIClient<T> {
     return axiosInstance
       .post<FetchResponse<T>>(this.endpoint, data)
       .then((res) => res.data);
+  }
+
+  uploadFile = (data: FormData, onUploadProgress: (progressEvent: AxiosProgressEvent) => void) => {
+    return axiosInstance.post(this.endpoint, data, {
+      onUploadProgress,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }).then(res => res.data);
   }
 }
 

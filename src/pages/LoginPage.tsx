@@ -14,6 +14,9 @@ import {
 import { Input } from "@/components/ui/input";
 import useLogin from "@/hooks/useLogin";
 import { Loader } from "lucide-react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { Navigate } from "react-router-dom";
 
 const formSchema = z.object({
   username: z.string().max(50),
@@ -21,6 +24,9 @@ const formSchema = z.object({
 });
 
 export default function LoginPage() {
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
   const loginMutation = useLogin();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -29,6 +35,9 @@ export default function LoginPage() {
       password: "",
     },
   });
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" />;
+  }
   const { isSubmitting } = form.formState;
 
   function onSubmit(values: z.infer<typeof formSchema>) {

@@ -8,12 +8,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { RootState } from "@/redux/store";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { Check } from "lucide-react";
 import React from "react";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, Navigate } from "react-router-dom";
 
 const HomePage: React.FC = () => {
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" />;
+  }
   return (
     <section className="h-screen grid lg:grid-cols-2 place-items-center py-20 md:py-32 gap-10">
       <div className="text-center lg:text-start space-y-6 p-10">
