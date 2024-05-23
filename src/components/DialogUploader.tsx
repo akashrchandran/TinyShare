@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -6,23 +6,21 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { FileUploader } from "@/components/FileUploader"
+} from "@/components/ui/dialog";
+import { FileUploader } from "@/components/FileUploader";
 import { useUploadFile } from "@/hooks/use-upload";
 import { UploadedFiles } from "./UploadedFiles";
 
 export function DialogUploader() {
   const { uploadFiles, progresses, uploadedFiles, isUploading } = useUploadFile(
     { defaultUploadedFiles: [] }
-  )
+  );
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">
-          Upload files
-        </Button>
+        <Button variant="outline">Upload files</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-xl">
+      <DialogContent className="max-w-full h-screen">
         <DialogHeader>
           <DialogTitle>Upload files</DialogTitle>
           <DialogDescription>
@@ -30,13 +28,13 @@ export function DialogUploader() {
           </DialogDescription>
         </DialogHeader>
         <FileUploader
-        maxSize={5 * 1024 * 1024}
-        progresses={progresses}
-        onUpload={uploadFiles}
-        disabled={isUploading}
-      />
-      <UploadedFiles uploadedFiles={uploadedFiles} />
+          maxSize={5 * 1024 * 1024}
+          progresses={progresses}
+          onUpload={uploadFiles}
+          disabled={isUploading}
+        />
+        <UploadedFiles uploadedFiles={uploadedFiles} />
       </DialogContent>
     </Dialog>
-  )
+  );
 }
