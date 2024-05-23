@@ -10,19 +10,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { FileUploader } from "@/components/FileUploader"
-import { useFileUpload } from "@/hooks/useUpload";
-import { toast } from "sonner";
 
 export function DialogUploader() {
   const [files, setFiles] = React.useState<File[]>([]);
-  const { upload, progress, error } = useFileUpload();
-
-  const handleUpload = async () => {
-    for (const file of files) {
-      await upload(file);
-    }
-  };
-  console.log(progress);
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -38,12 +28,10 @@ export function DialogUploader() {
           </DialogDescription>
         </DialogHeader>
         <FileUploader
-        onUpload={handleUpload}
           maxSize={5 * 1024 * 1024}
           onValueChange={setFiles}
           accept={{}}
           multiple={true}
-          progresses={{ progressKey: progress }}
         />
       </DialogContent>
     </Dialog>
