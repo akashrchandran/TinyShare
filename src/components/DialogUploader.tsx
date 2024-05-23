@@ -20,7 +20,7 @@ export function DialogUploader() {
       <DialogTrigger asChild>
         <Button variant="outline">Upload files</Button>
       </DialogTrigger>
-      <DialogContent className="max-w-full h-screen">
+      <DialogContent className="max-w-full max-h-screen">
         <DialogHeader>
           <DialogTitle>Upload files</DialogTitle>
           <DialogDescription>
