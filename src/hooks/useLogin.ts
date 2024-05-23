@@ -1,7 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import APIClient, { FetchResponse } from "@/services/api-helper";
 import { LoginResponse } from "@/models/LoginResponse";
-import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import {  useDispatch } from 'react-redux';
 import { loginSuccess } from "@/redux/store";
@@ -24,16 +23,13 @@ const useLogin = () => {
       },
       gcTime: 0,
       onSuccess: (data) => {
+        dispatch(loginSuccess());
         if ( data?.response?.access)
           localStorage.setItem('token', data?.response?.access);
-        toast.success("Login Successfull!", {description: "Redirecting you to your dashboard..."});
-        dispatch(loginSuccess());
-        setTimeout(() => {
         navigate("/dashboard");
-        }, 2000);
       },
-      onError: () => {
-        toast("Login failed", {description: loginMutation.error?.message});
+      onError: (error) => {
+        return error?.message;
       },
     }
   );

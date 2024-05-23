@@ -4,13 +4,14 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
-import { EmptyCard } from "@/components/EmptyCard"
-import { UploadedFile } from "@/hooks/use-upload"
+} from "@/components/ui/card";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { EmptyCard } from "@/components/EmptyCard";
+import { UploadedFile } from "@/hooks/use-upload";
+import { FileIcon, defaultStyles } from "react-file-icon";
 
 interface UploadedFilesCardProps {
-  uploadedFiles: UploadedFile[]
+  uploadedFiles: UploadedFile[];
 }
 
 export function UploadedFiles({ uploadedFiles }: UploadedFilesCardProps) {
@@ -24,17 +25,24 @@ export function UploadedFiles({ uploadedFiles }: UploadedFilesCardProps) {
         {uploadedFiles.length > 0 ? (
           <ScrollArea className="pb-4">
             <div className="flex w-max space-x-2.5">
-              {uploadedFiles.map((file) => (
-                <div key={file.key} className="relative aspect-video w-64">
-                  <img
-                    src={file.url}
-                    alt={file.name}
-                    sizes="(min-width: 640px) 640px, 100vw"
-                    loading="lazy"
-                    className="rounded-md object-cover"
-                  />
-                </div>
-              ))}
+              {uploadedFiles.map((file) => {
+                const extension = file.file_type.split(
+                  "/"
+                )[1] as keyof typeof defaultStyles;
+                return (
+                  <div key={file.id} className="relative aspect-video w-64">
+                    <div
+                      className="w-16 h-16 rounded-md object-cover"
+                      title={file.name}
+                    >
+                      <FileIcon
+                        extension={extension}
+                        {...defaultStyles[extension]}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
             </div>
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
@@ -47,5 +55,5 @@ export function UploadedFiles({ uploadedFiles }: UploadedFilesCardProps) {
         )}
       </CardContent>
     </Card>
-  )
+  );
 }

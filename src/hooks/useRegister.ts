@@ -1,6 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
 import APIClient, { FetchResponse } from "@/services/api-helper";
-import { toast } from "sonner"
 import { useNavigate } from "react-router-dom";
 
 interface LoginCredentials {
@@ -20,13 +19,10 @@ const useRegister = () => {
       },
       gcTime: 0,
       onSuccess: () => {
-        toast("You're registered!", {description: "Redirecting you to login..."});
-        setTimeout(() => {
         navigate("/login");
-        }, 2000);
       },
-      onError: () => {
-        toast("Registration failed", {description: loginMutation.error?.message});
+      onError: (error) => {
+        return error?.message;
       },
     }
   );

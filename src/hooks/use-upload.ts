@@ -5,10 +5,12 @@ import { getErrorMessage } from "@/lib/handle-errors";
 import APIClient from "@/services/api-helper";
 
 export interface UploadedFile {
-  key: string;
-  name: string;
-  thumb: string;
-  url: string;
+  file: string
+  file_type: string
+  id: number
+  name: string
+  uploaded_at: string
+  user: number
 }
 
 interface UseUploadFileProps {
@@ -18,7 +20,7 @@ interface UseUploadFileProps {
 export function useUploadFile({
   defaultUploadedFiles = []
 }: UseUploadFileProps = {}) {
-    const apiClient = new APIClient("upload/");
+    const apiClient = new APIClient<UploadedFile>("upload/");
   const [uploadedFiles, setUploadedFiles] =
     React.useState<UploadedFile[]>(defaultUploadedFiles);
   const [progresses, setProgresses] = React.useState<Record<string, number>>(
@@ -32,6 +34,7 @@ export function useUploadFile({
       const formData = new FormData();
       files.forEach((file) => {
         formData.append("file", file);
+        console.log(file);
       });
 
       const res = await apiClient.uploadFile(formData, (progressEvent) => {
@@ -45,8 +48,8 @@ export function useUploadFile({
           })
         }
       });
-
-      setUploadedFiles((prev) => (prev ? [...prev, ...res.data] : res.data));
+      console.log(res.response);
+      setUploadedFiles((prev) => (prev ? [...prev, res.response] : [res.response]));
     } catch (err) {
       toast.error(getErrorMessage(err));
     } finally {
