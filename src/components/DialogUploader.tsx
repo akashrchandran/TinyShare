@@ -1,5 +1,3 @@
-import * as React from "react"
-
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -10,14 +8,18 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { FileUploader } from "@/components/FileUploader"
+import { useUploadFile } from "@/hooks/use-upload";
+import { UploadedFiles } from "./UploadedFiles";
 
 export function DialogUploader() {
-  const [files, setFiles] = React.useState<File[]>([]);
+  const { uploadFiles, progresses, uploadedFiles, isUploading } = useUploadFile(
+    { defaultUploadedFiles: [] }
+  )
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="outline">
-          Upload files {files.length > 0 && `(${files.length})`}
+          Upload files
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-xl">
@@ -28,11 +30,12 @@ export function DialogUploader() {
           </DialogDescription>
         </DialogHeader>
         <FileUploader
-          maxSize={5 * 1024 * 1024}
-          onValueChange={setFiles}
-          accept={{}}
-          multiple={true}
-        />
+        maxSize={5 * 1024 * 1024}
+        progresses={progresses}
+        onUpload={uploadFiles}
+        disabled={isUploading}
+      />
+      <UploadedFiles uploadedFiles={uploadedFiles} />
       </DialogContent>
     </Dialog>
   )
