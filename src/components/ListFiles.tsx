@@ -23,11 +23,11 @@ const ListFiles = () => {
         </TableCell>
         <TableCell className="font-medium">
           <div className="sm:w-auto w-20 sm:overflow-visible overflow-hidden sm:whitespace-normal whitespace-nowrap overflow-ellipsis">
-          <Skeleton className="m-4 h-4 w-[300px]" />
+            <Skeleton className="m-4 h-4 w-[300px]" />
           </div>
         </TableCell>
         <TableCell>
-            <Skeleton className="h-3 w-10 rounded-full" />
+          <Skeleton className="h-3 w-10 rounded-full" />
         </TableCell>
         <TableCell className="hidden md:table-cell">
           <Skeleton className="w-[100px] h-[20px] rounded-full" />
@@ -38,59 +38,65 @@ const ListFiles = () => {
       </TableRow>
     ));
 
-  return data?.response?.map((file) => (
-    <TableRow key={file.id}>
-      <TableCell className="hidden sm:table-cell">
-        <FileIcon
-          className="aspect-square rounded-md object-cover"
-          height="20"
-          width="20"
-        />
-      </TableCell>
-      <TableCell className="font-medium">
-        <div className="sm:w-auto w-20 sm:overflow-visible overflow-hidden sm:whitespace-normal whitespace-nowrap overflow-ellipsis">
-          {file.name}
-        </div>
-      </TableCell>
-      <TableCell>
-        <Badge variant="outline">{file.file_type}</Badge>
-      </TableCell>
-      <TableCell className="hidden md:table-cell">
-        {(() => {
-          const uploadedDate = new Date(file.uploaded_at);
-          const today = new Date();
+  return data?.response?.length ? (
+    data?.response?.map((file) => (
+      <TableRow key={file.id}>
+        <TableCell className="hidden sm:table-cell">
+          <FileIcon
+            className="aspect-square rounded-md object-cover"
+            height="20"
+            width="20"
+          />
+        </TableCell>
+        <TableCell className="font-medium">
+          <div className="sm:w-auto w-20 sm:overflow-visible overflow-hidden sm:whitespace-normal whitespace-nowrap overflow-ellipsis">
+            {file.name}
+          </div>
+        </TableCell>
+        <TableCell>
+          <Badge variant="outline">{file.file_type}</Badge>
+        </TableCell>
+        <TableCell className="hidden md:table-cell">
+          {(() => {
+            const uploadedDate = new Date(file.uploaded_at);
+            const today = new Date();
 
-          if (uploadedDate.toDateString() === today.toDateString()) {
-            return uploadedDate.toLocaleTimeString([], {
-              hour: "2-digit",
-              minute: "2-digit",
-            });
-          } else {
-            return uploadedDate.toLocaleDateString("en-US", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            });
-          }
-        })()}
-      </TableCell>
-      <TableCell>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button aria-haspopup="true" size="icon" variant="ghost">
-              <DotsHorizontalIcon className="h-4 w-4" />
-              <span className="sr-only">Toggle menu</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuItem>Delete</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </TableCell>
-    </TableRow>
-  ));
+            if (uploadedDate.toDateString() === today.toDateString()) {
+              return uploadedDate.toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              });
+            } else {
+              return uploadedDate.toLocaleDateString("en-US", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              });
+            }
+          })()}
+        </TableCell>
+        <TableCell>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button aria-haspopup="true" size="icon" variant="ghost">
+                <DotsHorizontalIcon className="h-4 w-4" />
+                <span className="sr-only">Toggle menu</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuItem>Edit</DropdownMenuItem>
+              <DropdownMenuItem>Delete</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </TableCell>
+      </TableRow>
+    ))
+  ) : (
+    <div className="flex justify-center items-center">
+      No files found, please upload some.
+    </div>
+  );
 };
 
 export default ListFiles;
