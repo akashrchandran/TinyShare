@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { FileIcon, defaultStyles } from "react-file-icon";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface FileUploaderProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -108,6 +109,7 @@ export function FileUploader(props: FileUploaderProps) {
     prop: valueProp,
     onChange: onValueChange,
   });
+  const queryClient = useQueryClient();
 
   const onDrop = React.useCallback(
     (acceptedFiles: File[], rejectedFiles: FileRejection[]) => {
@@ -149,6 +151,7 @@ export function FileUploader(props: FileUploaderProps) {
           loading: `Uploading ${target}...`,
           success: () => {
             setFiles([]);
+            queryClient.invalidateQueries({ queryKey: ["files"] });
             return `${target} uploaded`;
           },
           error: `Failed to upload ${target}`,

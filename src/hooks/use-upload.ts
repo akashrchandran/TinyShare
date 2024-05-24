@@ -34,7 +34,6 @@ export function useUploadFile({
       const formData = new FormData();
       files.forEach((file) => {
         formData.append("file", file);
-        console.log(file);
       });
 
       const res = await apiClient.uploadFile(formData, (progressEvent) => {
