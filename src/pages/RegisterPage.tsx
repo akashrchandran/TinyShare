@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import useRegister from "@/hooks/useRegister";
-import { Loader } from "lucide-react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { Navigate } from "react-router-dom";
@@ -131,7 +130,7 @@ export default function RegisterPage() {
               type="submit"
               disabled={isSubmitting || registerMutaion.isPending}
             >
-              {registerMutaion.isPending ? <Loader /> : "Submit"}
+              Submit
             </Button>
           </form>
         </Form>

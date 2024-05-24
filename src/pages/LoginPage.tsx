@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import useLogin from "@/hooks/useLogin";
-import { Loader } from "lucide-react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { Navigate } from "react-router-dom";
@@ -113,7 +112,7 @@ export default function LoginPage() {
               type="submit"
               disabled={isSubmitting || loginMutation.isPending}
             >
-              {loginMutation.isPending ? <Loader /> : "Submit"}
+              Submit
             </Button>
           </form>
         </Form>
