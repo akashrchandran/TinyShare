@@ -16,7 +16,7 @@ const FilesTable = () => {
         <ScrollArea className="h-[80vh]">
           <Table>
             <TableHeader className="bg-background">
-              <TableRow>
+              <TableRow className="hover:bg-transparent">
                 <TableHead className="hidden w-[100px] sm:table-cell">
                   <span className="sr-only">Image</span>
                 </TableHead>

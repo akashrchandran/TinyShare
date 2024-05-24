@@ -1,4 +1,3 @@
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { DotsHorizontalIcon, FileIcon } from "@radix-ui/react-icons";
 import {
@@ -53,9 +52,7 @@ const ListFiles = () => {
             {file.name}
           </div>
         </TableCell>
-        <TableCell>
-          <Badge variant="outline">{file.file_type}</Badge>
-        </TableCell>
+        <TableCell>{file.file_type}</TableCell>
         <TableCell className="hidden md:table-cell">
           {(() => {
             const uploadedDate = new Date(file.uploaded_at);
