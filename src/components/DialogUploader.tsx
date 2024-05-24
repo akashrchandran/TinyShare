@@ -18,16 +18,20 @@ export function DialogUploader() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Upload files</Button>
+        <Button className="flex gap-1" size="sm">
+          Upload Files
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-w-full max-h-screen">
         <DialogHeader>
-          <DialogTitle>Upload files</DialogTitle>
+          <DialogTitle>Upload Files</DialogTitle>
           <DialogDescription>
             Drag and drop your files here or click to browse.
           </DialogDescription>
         </DialogHeader>
         <FileUploader
+          multiple={true}
+          maxFiles={Infinity}
           maxSize={5 * 1024 * 1024}
           progresses={progresses}
           onUpload={uploadFiles}
