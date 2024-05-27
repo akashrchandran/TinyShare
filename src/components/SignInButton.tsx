@@ -24,7 +24,7 @@ const SignInButton = ({ text }: Props) => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
             <Avatar>
-              <AvatarImage src="https://github.com/akashrchandran.png"/>
+              <AvatarImage src="https://i.ibb.co/Zh10CPC/115-1150152-default-profile-picture-avatar-png-green.png"/>
               <AvatarFallback>Avatar</AvatarFallback>
             </Avatar>
         </DropdownMenuTrigger>
