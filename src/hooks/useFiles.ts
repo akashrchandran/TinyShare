@@ -7,6 +7,7 @@ const apiClient = new APIClient<FetchResponse<UploadedFile[]>>('files/');
 const useFiles = () => useQuery({
   queryKey: ['files'],
   queryFn: () => apiClient.get(),
+  staleTime: 1000 * 60 * 5,
 });
 
 

@@ -10,6 +10,7 @@ import {
 import useFiles from "@/hooks/useFiles";
 import { TableCell, TableRow } from "./ui/table";
 import { Skeleton } from "./ui/skeleton";
+import { Badge } from "./ui/badge";
 
 const ListFiles = () => {
   const { data, isPending } = useFiles();
@@ -17,12 +18,10 @@ const ListFiles = () => {
   if (isPending)
     return skeletons.map((_, index) => (
       <TableRow key={index}>
-        <TableCell className="hidden sm:table-cell">
-          <Skeleton className="h-[20px] w-[20px] rounded-full" />
-        </TableCell>
         <TableCell className="font-medium">
-          <div className="sm:w-auto w-20 sm:overflow-visible overflow-hidden sm:whitespace-normal whitespace-nowrap overflow-ellipsis">
-            <Skeleton className="m-4 h-4 w-[300px]" />
+          <div className="flex items-center gap-1 ">
+            <Skeleton className="h-[16px] w-[16px] rounded-full" />
+            <Skeleton className="my-3 h-4 w-[300px]" />
           </div>
         </TableCell>
         <TableCell>
@@ -40,19 +39,19 @@ const ListFiles = () => {
   return data?.response?.length ? (
     data?.response?.map((file) => (
       <TableRow key={file.id}>
-        <TableCell className="hidden sm:table-cell">
-          <FileIcon
-            className="aspect-square rounded-md object-cover"
-            height="20"
-            width="20"
-          />
-        </TableCell>
         <TableCell className="font-medium">
-          <div className="sm:w-auto w-20 sm:overflow-visible overflow-hidden sm:whitespace-normal whitespace-nowrap overflow-ellipsis">
+          <div className="flex gap-1">
+            <FileIcon
+              className="aspect-square rounded-md object-cover"
+              height="20"
+              width="20"
+            />{" "}
             {file.name}
           </div>
         </TableCell>
-        <TableCell>{file.file_type}</TableCell>
+        <TableCell>
+          <Badge variant="outline">{file.file_type}</Badge>
+        </TableCell>
         <TableCell className="hidden md:table-cell">
           {(() => {
             const uploadedDate = new Date(file.uploaded_at);

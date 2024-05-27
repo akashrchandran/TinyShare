@@ -11,22 +11,18 @@ import ListFiles from "./ListFiles";
 
 const FilesTable = () => {
   return (
-    <main className="grid flex-1 items-start gap-4 p-4 pt-6 sm:px-6 sm:py-0 md:gap-8">
       <div className="relative w-full overflow-auto">
         <ScrollArea className="h-[80vh]">
           <Table>
             <TableHeader className="bg-background">
               <TableRow className="hover:bg-transparent">
-                <TableHead className="hidden w-[100px] sm:table-cell">
-                  <span className="sr-only">Image</span>
-                </TableHead>
-                <TableHead>Name</TableHead>
-                <TableHead>File Type</TableHead>
-                <TableHead className="hidden md:table-cell">
+                <TableHead className="w-7/10">Name</TableHead>
+                <TableHead className="w-1/10">File Type</TableHead>
+                <TableHead className="hidden md:table-cell w-1/10">
                   Uploaded at
                 </TableHead>
                 <TableHead>
-                  <span className="sr-only">Actions</span>
+                  <span className="sr-only w-1/10">Actions</span>
                 </TableHead>
               </TableRow>
             </TableHeader>
@@ -36,7 +32,6 @@ const FilesTable = () => {
           </Table>
         </ScrollArea>
       </div>
-    </main>
   );
 };
 

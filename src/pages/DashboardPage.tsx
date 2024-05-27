@@ -15,8 +15,8 @@ export default function DashboardPage() {
 
   return (
     <>
-      <div className="pt-16">
-        <header className="flex h-14 items-center gap-4 border-b bg-background px-4 pt-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6 mb-4">
+      <div className="px-3 lg:px-10 pt-16">
+        <header className="flex h-14 items-center bg-background pt-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent mb-4">
           <div className="flex-1">
             <h1 className="font-semibold text-4xl">Files</h1>
           </div>
