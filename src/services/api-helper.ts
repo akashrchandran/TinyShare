@@ -22,14 +22,13 @@ const setAuthorizationHeader = (token: string | null) => {
   }
 };
 
-const token = localStorage.getItem("token");
-setAuthorizationHeader(token);
-
 class APIClient<T> {
   endpoint: string;
 
   constructor(endpoint: string) {
     this.endpoint = endpoint;
+    const token = localStorage.getItem("token");
+    setAuthorizationHeader(token);
   }
 
   getAll = (config: AxiosRequestConfig) => {
@@ -39,25 +38,28 @@ class APIClient<T> {
   };
 
   get = () => {
-    return axiosInstance
-      .get<T>(this.endpoint)
-      .then((res) => res.data);
+    return axiosInstance.get<T>(this.endpoint).then((res) => res.data);
   };
 
   post = (data: object) => {
     return axiosInstance
       .post<FetchResponse<T>>(this.endpoint, data)
       .then((res) => res.data);
-  }
+  };
 
-  uploadFile = (data: FormData, onUploadProgress: (progressEvent: AxiosProgressEvent) => void) => {
-    return axiosInstance.post(this.endpoint, data, {
-      onUploadProgress,
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    }).then(res => res.data);
-  }
+  uploadFile = (
+    data: FormData,
+    onUploadProgress: (progressEvent: AxiosProgressEvent) => void
+  ) => {
+    return axiosInstance
+      .post(this.endpoint, data, {
+        onUploadProgress,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => res.data);
+  };
 }
 
 export default APIClient;
