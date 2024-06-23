@@ -49,7 +49,7 @@ const ListFiles = () => {
             {file.name}
           </div>
         </TableCell>
-        <TableCell>
+        <TableCell className="hidden md:table-cell">
           {formatBytes(file.file_size, {decimals:2, sizeType:"normal"})}
         </TableCell>
         <TableCell>
