@@ -8,7 +8,7 @@ export interface FetchResponse<T> {
 }
 
 const axiosInstance = axios.create({
-  baseURL: "https://sample-django-7lfj.onrender.com/api/",
+  baseURL: "https://tinyshare-backend-20da70c49ac9.herokuapp.com/api/",
   headers: {
     "Content-Type": "application/json",
   },

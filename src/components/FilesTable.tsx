@@ -19,6 +19,9 @@ const FilesTable = () => {
                 <TableHead className="w-7/10">Name</TableHead>
                 <TableHead className="w-1/10">File Type</TableHead>
                 <TableHead className="hidden md:table-cell w-1/10">
+                  File Size
+                </TableHead>
+                <TableHead className="hidden md:table-cell w-1/10">
                   Uploaded at
                 </TableHead>
                 <TableHead>

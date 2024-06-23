@@ -8,6 +8,7 @@ export interface UploadedFile {
   file: string
   file_type: string
   id: number
+  file_size: number
   name: string
   uploaded_at: string
   user: number

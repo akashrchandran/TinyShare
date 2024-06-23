@@ -4,13 +4,13 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import useFiles from "@/hooks/useFiles";
 import { TableCell, TableRow } from "./ui/table";
 import { Skeleton } from "./ui/skeleton";
 import { Badge } from "./ui/badge";
+import { formatBytes } from "@/lib/utils";
 
 const ListFiles = () => {
   const { data, isPending } = useFiles();
@@ -50,6 +50,9 @@ const ListFiles = () => {
           </div>
         </TableCell>
         <TableCell>
+          {formatBytes(file.file_size, {decimals:2, sizeType:"normal"})}
+        </TableCell>
+        <TableCell>
           <Badge variant="outline">{file.file_type}</Badge>
         </TableCell>
         <TableCell className="hidden md:table-cell">
@@ -80,9 +83,8 @@ const ListFiles = () => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem>Edit</DropdownMenuItem>
-              <DropdownMenuItem>Delete</DropdownMenuItem>
+              <DropdownMenuItem>Rename</DropdownMenuItem>
+              <DropdownMenuItem className="text-red">Delete</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </TableCell>
